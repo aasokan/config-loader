@@ -6,7 +6,7 @@ package com.config.loader;
 public class ConfigLoaderMain {
 
     public static void main(final String args[]) {
-        System.out.println("BUGSHGSH");
+
 
     }
 }
