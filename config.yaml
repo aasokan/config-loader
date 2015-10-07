@@ -1,0 +1,12 @@
+---
+  experiment: "test"
+  models:
+    -
+      name: "AModel"
+      value:
+        aValue: 5
+    -
+      name: "BModel"
+      value:
+        bValue: 15
+        bValue2: 30
