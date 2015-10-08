@@ -1,7 +1,16 @@
+---
+# Sample Config File
 experiment: test
-models:
-- !!com.config.loader.model.AModel
-  aValue: 5
-- !!com.config.loader.model.BModel
-  bValue: 15
-  bValue2: 30
+experts:
+  - !!com.config.loader.experts.AExpert
+    models:
+      - !!com.config.loader.model.AModel
+        &amodelbase
+        aValue: 2
+  - !!com.config.loader.experts.BExpert
+      models:
+        - !!com.config.loader.model.AModel
+          <<: *amodelbase
+          aValue2: 4
+        - !!com.config.loader.model.BModel
+          bValue: 1

@@ -5,7 +5,7 @@ package com.config.loader.model;
  */
 public interface Model {
     default public String getModelName() {
-        return this.getClass().getName();
+        return this.getClass().getSimpleName();
     }
 
 }

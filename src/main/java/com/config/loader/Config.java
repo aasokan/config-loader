@@ -1,5 +1,6 @@
-package com.config.loader.model;
+package com.config.loader;
 
+import com.config.loader.experts.Expert;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
@@ -18,5 +19,5 @@ public class Config {
 
     @NotNull
     @JsonProperty
-    public List<Model> models = Lists.newArrayList();
+    public List<Expert> experts = Lists.newArrayList();
 }

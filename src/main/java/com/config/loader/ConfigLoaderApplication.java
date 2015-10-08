@@ -1,6 +1,5 @@
 package com.config.loader;
 
-import com.config.loader.model.Config;
 import com.config.loader.modules.ConfigLoader;
 import com.config.loader.modules.ConfigLoaderModule;
 import com.config.loader.parser.Parser;

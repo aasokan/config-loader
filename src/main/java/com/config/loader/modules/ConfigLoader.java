@@ -1,6 +1,6 @@
 package com.config.loader.modules;
 
-import com.config.loader.model.Config;
+import com.config.loader.Config;
 import com.config.loader.parser.Parser;
 import com.google.inject.Inject;
 
