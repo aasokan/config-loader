@@ -3,8 +3,10 @@ package com.config.loader;
 import com.config.loader.model.Config;
 import com.config.loader.modules.ConfigLoader;
 import com.config.loader.modules.ConfigLoaderModule;
+import com.config.loader.parser.Parser;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Key;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -22,7 +24,7 @@ public class ConfigLoaderApplication {
         private File inputFile;
     }
 
-    public static void main(final String args[]) {
+    public static void main(final String args[]) throws IOException {
         final Options arguments = new Options();
         final CmdLineParser parser = new CmdLineParser(arguments);
         try {
@@ -45,12 +47,8 @@ public class ConfigLoaderApplication {
             System.exit(1);
         }
 
-        // Assert Config
-        if (config != null) {
-            System.out.println(config.toString());
-        }
-
-        config.printModelNames();
+        final Parser writer = injector.getInstance(Key.get(Parser.class, Parser.Write.class));
+        System.out.println(writer.getStringRepresentation(config));
 
     }
 }

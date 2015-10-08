@@ -1,12 +1,7 @@
----
-  experiment: "test"
-  models:
-    -
-      name: "AModel"
-      value:
-        aValue: 5
-    -
-      name: "BModel"
-      value:
-        bValue: 15
-        bValue2: 30
+experiment: test
+models:
+- !!com.config.loader.model.AModel
+  aValue: 5
+- !!com.config.loader.model.BModel
+  bValue: 15
+  bValue2: 30

@@ -14,7 +14,7 @@ public class ConfigLoader {
     private final Parser parser;
 
     @Inject
-    public ConfigLoader(final Parser parser) {
+    public ConfigLoader(@Parser.Read final Parser parser) {
         this.parser = parser;
     }
 

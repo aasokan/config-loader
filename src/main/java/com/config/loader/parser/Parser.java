@@ -1,23 +1,34 @@
 package com.config.loader.parser;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.inject.BindingAnnotation;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Parser Interface
  */
-public abstract class Parser {
-    private final ObjectMapper objectMapper;
+public interface Parser {
+    public <T> T readValue(File src, Class<T> valueType) throws IOException;
 
-    public Parser(final ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-        this.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    public String getStringRepresentation(final Object object) throws IOException;
+
+    @BindingAnnotation
+    @Target({FIELD, PARAMETER, METHOD})
+    @Retention(RUNTIME)
+    public @interface Read {
     }
 
-    public <T> T readValue(File src, Class<T> valueType) throws IOException {
-        return this.objectMapper.readValue(src, valueType);
+    @BindingAnnotation
+    @Target({FIELD, PARAMETER, METHOD})
+    @Retention(RUNTIME)
+    public @interface Write {
     }
 }
