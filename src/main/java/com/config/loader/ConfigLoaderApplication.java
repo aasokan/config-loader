@@ -12,6 +12,7 @@ import org.kohsuke.args4j.Option;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Main class for testing out loaders
@@ -37,17 +38,17 @@ public class ConfigLoaderApplication {
         final Injector injector = Guice.createInjector(new ConfigLoaderModule());
 
         final ConfigLoader configLoader = injector.getInstance(ConfigLoader.class);
-        Config config = null;
+        List<Config> configs = null;
 
         try {
-            config = configLoader.loadConfig(arguments.inputFile);
+            configs = configLoader.loadAllConfigs(arguments.inputFile);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
 
         final Parser writer = injector.getInstance(Key.get(Parser.class, Parser.Write.class));
-        System.out.println(writer.getStringRepresentation(config));
+        System.out.println(writer.getStringRepresentation(configs));
 
     }
 }

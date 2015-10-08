@@ -18,6 +18,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public interface Parser {
     public <T> T readValue(File src, Class<T> valueType) throws IOException;
 
+    public Iterable<Object> readAll(File src) throws IOException;
+
     public String getStringRepresentation(final Object object) throws IOException;
 
     @BindingAnnotation

@@ -1,16 +1,31 @@
+# References work at per-document level
 ---
-# Sample Config File
-experiment: test
+# Experience 1 Config File
+experience: base_experience
 experts:
-  - !!com.config.loader.experts.AExpert
+  - !aExpert
     models:
-      - !!com.config.loader.model.AModel
+      - !aModel
         &amodelbase
         aValue: 2
-  - !!com.config.loader.experts.BExpert
+  - !bExpert
       models:
-        - !!com.config.loader.model.AModel
+        - !aModel
           <<: *amodelbase
           aValue2: 4
-        - !!com.config.loader.model.BModel
+        - !bModel
           bValue: 1
+---
+# Experience 2 Config File
+experience: new_experience
+experts:
+  - !aExpert
+    models:
+      - !bModel
+        bValue2: 2
+  - !bExpert
+      models:
+        - !aModel
+          aValue2: 3
+        - !bModel
+          bValue: 5

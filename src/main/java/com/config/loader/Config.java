@@ -15,7 +15,7 @@ public class Config {
 
     @NotNull
     @JsonProperty
-    public String experiment = StringUtils.EMPTY;
+    public String experience = StringUtils.EMPTY;
 
     @NotNull
     @JsonProperty

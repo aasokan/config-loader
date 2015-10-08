@@ -1,10 +1,17 @@
 package com.config.loader.parser;
 
+import com.config.loader.Config;
+import com.config.loader.experts.AExpert;
+import com.config.loader.experts.BExpert;
+import com.config.loader.model.AModel;
+import com.config.loader.model.BModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
+import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 
 import javax.inject.Singleton;
 import java.io.File;
@@ -19,7 +26,17 @@ public class ParserModule extends AbstractModule {
     @Provides
     @Singleton
     Yaml providesYaml() {
-        return new Yaml();
+        final Constructor constructor = new Constructor(Config.class);
+
+        // Tags for Experts
+        constructor.addTypeDescription(new TypeDescription(AExpert.class, "!aExpert"));
+        constructor.addTypeDescription(new TypeDescription(BExpert.class, "!bExpert"));
+
+        // Tags for Models
+        constructor.addTypeDescription(new TypeDescription(AModel.class, "!aModel"));
+        constructor.addTypeDescription(new TypeDescription(BModel.class, "!bModel"));
+
+        return new Yaml(constructor);
     }
 
     @Provides
@@ -54,6 +71,11 @@ public class ParserModule extends AbstractModule {
         }
 
         @Override
+        public Iterable<Object> readAll(File src) throws IOException {
+            return yaml.loadAll(new FileReader(src));
+        }
+
+        @Override
         public String getStringRepresentation(Object object) throws IOException {
             return yaml.dump(object);
         }
@@ -71,6 +93,11 @@ public class ParserModule extends AbstractModule {
         @Override
         public <T> T readValue(File src, Class<T> valueType) throws IOException {
             return this.objectMapper.readValue(src, valueType);
+        }
+
+        @Override
+        public Iterable<Object> readAll(File src) throws IOException {
+            return null;
         }
 
         @Override
